@@ -1,15 +1,6 @@
-# Astro Example: Markdoc (experimental)
+# Ansango Code Blog: Markdoc
 
-This starter showcases the experimental Markdoc integration.
-
-```
-npm create astro@latest -- --template with-markdoc
-```
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/with-markdoc)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/with-markdoc)
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Experimental Markdoc integration.
 
 ## 🚀 Project Structure
 
