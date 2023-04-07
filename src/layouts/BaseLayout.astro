@@ -1,5 +1,7 @@
 ---
 import BaseHead from "@/components/BaseHead";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import type { SiteMeta } from "@/data";
 import { siteConfig } from "@/site-config";
 export interface Props {
@@ -58,8 +60,10 @@ const {
     </script>
   </head>
   <body>
+    <Header />
     <main id="main" class="flex-1">
       <slot />
     </main>
+    <Footer />
   </body>
 </html>
