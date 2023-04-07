@@ -1,0 +1,28 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+import type { Element } from "@/data";
+
+import { getFormattedDate } from "@/utils";
+type Props = {
+  post: CollectionEntry<"post">;
+  withDesc?: boolean;
+} & Element;
+
+const { post, as: Element = "div", withDesc = false } = Astro.props;
+const date = new Date(post.data.publishDate);
+const datetime = date.toISOString();
+const postDate = getFormattedDate(date);
+---
+
+<time datetime={datetime} class="min-w-[120px] text-gray-500">{postDate}</time>
+<Element>
+  <a href={`/post/${post.slug}`} class="cactus-link" rel="prefetch">
+    {post.data.title}
+  </a>
+</Element>
+{
+  withDesc && (
+    <q class="line-clamp-3 mt-2 block italic">{post.data.description}</q>
+  )
+}

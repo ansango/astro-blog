@@ -1,0 +1,65 @@
+---
+import BaseHead from "@/components/BaseHead";
+import type { SiteMeta } from "@/data";
+import { siteConfig } from "@/site-config";
+export interface Props {
+  meta: SiteMeta;
+}
+
+const {
+  meta: { title, description = siteConfig.description, ogImage, articleDate },
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <BaseHead
+      title={title}
+      description={description}
+      ogImage={ogImage}
+      articleDate={articleDate}
+    />
+    <script define:vars={{ siteConfig }}>
+      const root = document.documentElement;
+      const colorThemeMetaTag = document.querySelector(
+        "meta[name='theme-color']"
+      );
+
+      function getThemePreference() {
+        if (
+          typeof localStorage !== "undefined" &&
+          localStorage.getItem("theme")
+        ) {
+          return localStorage.getItem("theme");
+        }
+        return window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light";
+      }
+
+      const isDark = getThemePreference() === "dark";
+
+      const observer = new MutationObserver(() => {
+        const rootIsDark = root.classList.contains("dark");
+
+        colorThemeMetaTag.setAttribute(
+          "content",
+          siteConfig[rootIsDark ? "themeColorDark" : "themeColorLight"]
+        );
+
+        if (typeof localStorage !== "undefined") {
+          localStorage.setItem("theme", rootIsDark ? "dark" : "light");
+        }
+      });
+      observer.observe(root, { attributeFilter: ["class"] });
+
+      root.classList.toggle("dark", isDark);
+    </script>
+  </head>
+  <body>
+    <main id="main" class="flex-1">
+      <slot />
+    </main>
+  </body>
+</html>
