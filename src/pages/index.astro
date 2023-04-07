@@ -6,7 +6,13 @@ const intro = await getEntryBySlug("docs", "intro");
 const { Content } = await intro.render();
 ---
 
-<Layout title={intro.data.title}>
+<Layout
+  meta={{
+    title: "Astro Docs",
+    description:
+      "Documentation for Astro, a new kind of static site generator.",
+  }}
+>
   <main>
     <h1>{intro.data.title}</h1>
     <Content revealSecret />
