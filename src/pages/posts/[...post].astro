@@ -3,24 +3,53 @@ import type { GetStaticPathsResult } from "astro";
 import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
 import PostLayout from "@/layouts/PostLayout";
+import Pagination from "@/components/Pagination";
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
-  const posts: CollectionEntry<"post">[] = await getCollection("post");
+  const posts: Array<CollectionEntry<"post">> = await getCollection("post");
   const params = posts.map((post) => ({
     params: { post: post.slug },
-    props: { post },
+    props: {
+      post,
+      next: {
+        slug: posts[posts.indexOf(post) + 1]?.slug,
+        title: posts[posts.indexOf(post) + 1]?.data.title,
+      },
+      prev: {
+        slug: posts[posts.indexOf(post) - 1]?.slug,
+        title: posts[posts.indexOf(post) - 1]?.data.title,
+      },
+    },
   }));
   return params;
 }
 
 interface Props {
   post: CollectionEntry<"post">;
+  next: { slug: string; title: string };
+  prev: { slug: string; title: string };
 }
 
-const { post } = Astro.props;
+const { post, next, prev } = Astro.props;
+
 const { Content } = await post.render();
+const paginationProps = {
+  ...(prev && {
+    prevUrl: {
+      url: `/posts/${prev.slug}`,
+      text: `← ${prev.title}`,
+    },
+  }),
+  ...(next && {
+    nextUrl: {
+      url: `/posts/${next.slug}`,
+      text: `${next.title} →`,
+    },
+  }),
+};
 ---
 
 <PostLayout post={post}>
   <Content />
+  <Pagination {...paginationProps} />
 </PostLayout>

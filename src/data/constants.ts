@@ -1,8 +1,4 @@
-export const MENU_LINKS = [
-  {
-    title: "Home",
-    path: "/",
-  },
+export const navLinks = [
   {
     title: "About",
     path: "/about",
