@@ -48,17 +48,15 @@ const paginationProps = {
 ---
 
 <PageLayout meta={meta}>
-  <h1 class="title mb-6 flex items-center">
-    <a href="/tags/" class="text-accent sm:hover:underline">Tags</a><span
-      class="ml-2 mr-3">→</span
-    >
-    <span class="text-xl">#{tag}</span>
+  <h1>
+    <a href="/tags/">Tags</a><span>→</span>
+    <span>#{tag}</span>
   </h1>
   <section aria-label="Blog post list">
-    <ul class="space-y-8 text-left">
+    <ul>
       {
         page.data.map((p) => (
-          <li class="flex flex-col flex-wrap gap-x-2 sm:flex-row [&_q]:w-full">
+          <li>
             <PostPreview post={p} as="h2" withDesc />
           </li>
         ))

@@ -1,15 +1,11 @@
 ---
-import { navLinks } from "@/data";
 const year = new Date().getFullYear();
 ---
 
 <footer>
-  <div>
+  <p>
     Copyright &copy; {year}
     <span aria-label="rocket emoji">🚀</span>
     Anibal Santos
-  </div>
-  <nav aria-label="More on this site">
-    {navLinks.map(({ path, title }) => <a href={path}>{title}</a>)}
-  </nav>
+  </p>
 </footer>

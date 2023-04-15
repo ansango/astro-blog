@@ -27,8 +27,7 @@ const {
       const colorThemeMetaTag = document.querySelector(
         "meta[name='theme-color']"
       );
-
-      function getThemePreference() {
+      const getThemePreference = () => {
         if (
           typeof localStorage !== "undefined" &&
           localStorage.getItem("theme")
@@ -38,7 +37,7 @@ const {
         return window.matchMedia("(prefers-color-scheme: dark)").matches
           ? "dark"
           : "light";
-      }
+      };
 
       const isDark = getThemePreference() === "dark";
 
